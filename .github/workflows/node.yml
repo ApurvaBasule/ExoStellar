@@ -37,19 +37,9 @@ jobs:
         run: npm run build --prefix client
 
       - name: Run Server Tests
-        run: |
-          if [ -f server/jest.config.js ]; then
-            npx jest --config=server/jest.config.js
-          else
-            npx jest
-          fi
+        run: npx jest --config=server/jest.config.js
 
       - name: Run Client Tests
-        run: |
-          if [ -f client/jest.config.js ]; then
-            npx jest --config=client/jest.config.js
-          else
-            npx jest
-          fi
+        run: npx jest --config=client/jest.config.js
 
 
