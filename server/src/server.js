@@ -1,28 +1,31 @@
+const dotenv = require('dotenv');
+dotenv.config(); 
 const app = require('./app');
-const mongoose = require("mongoose");
 const http = require('http');
+const { loadPlanetsData } = require('./models/planets.model');
+const { loadLaunchData } = require('./models/launches.model');
+const {mongoConnect} = require('./services/mongo');
 
-const { loadPlanetsData } = require('./models/planets.model')
 const server = http.createServer(app);
 
-const PORT = process.env.PORT || 5000
-
-const MONGO_URL = "mongodb+srv://apurvabasule:pMjtJekUCAMW8uWg@cluster0.xoobs8y.mongodb.net/?retryWrites=true&w=majority"
-
+const PORT = process.env.PORT || 7000;
 
 async function startServer() {
-   await mongoose.connect(MONGO_URL);
-   await loadPlanetsData();
-   server.listen(PORT, () => {
+  try {
+    // Connect to MongoDB first
+    await mongoConnect();
+    // Load planets data after the connection is established 
+    await loadPlanetsData();
+   //load launches data from SpaceX api after the connection is estamblished
+    await loadLaunchData();
+    // Start the server
+    server.listen(PORT, () => {
       console.log(`Listening on PORT ${PORT}....`);
-   })
+    });
+  } catch (error) {
+    console.error('Error starting server:', error);
+  }
 }
 
-mongoose.connection.on('open', () => {
-   console.log('MongoDB Connection is ready!');
-})
-mongoose.connection.on('error', (err) => {
-   console.error(err);
-})
-
 startServer();
+

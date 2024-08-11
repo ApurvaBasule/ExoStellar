@@ -1,5 +1,5 @@
 {
-  "name": "nasa-front-end",
+  "name": "planets-dashboard",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,13 +11,17 @@
     "client": "npm start --prefix client",
     "watch": "concurrently \"npm run server\" \"npm run client\"",
     "test": "npm run test --prefix server && npm run test --prefix client",
-    "deploy":"concurrently \"npm run build --prefix client \" \"npm start --prefix server\""
-    
+    "deploy": "concurrently \"npm run build --prefix client \" \"npm start --prefix server\"",
+    "deploy-cluster": "npm run build --prefix client && npm run cluster --prefix server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "mongoose": "^8.4.4",
+    "morgan": "^1.10.0"
   }
 }

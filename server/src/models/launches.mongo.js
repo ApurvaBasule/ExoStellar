@@ -4,6 +4,7 @@ const launchesSchema = new mongoose.Schema({
   flightNumber: {
     type: Number,
     required: true,
+    
   },
   launchDate: {
     type: Date,
