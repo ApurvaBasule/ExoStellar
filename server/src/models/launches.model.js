@@ -41,8 +41,9 @@ async function populateLaunches() {
         success: launchDoc.success,
         customers,
       };
-
+      
       await saveLaunch(launch);
+      
     }
   } catch (error) {
     handleError('Problem downloading launch data', error);
@@ -141,3 +142,4 @@ module.exports = {
   addNewLaunch,
   abortLaunchWithId,
 };
+
