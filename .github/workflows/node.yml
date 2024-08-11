@@ -21,10 +21,21 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Use MongoDB from GitHub actions
-        uses: supercharge/mongodb-github-action@1.6.0
+        uses: supercharge/mongodb-github-action@1.11.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-      - run: npm install
-      - run: npm run build --prefix client
-      - run: npm test
+     - name: Install dependencies
+        run: npm install
 
+      - name: Build client
+        run: npm run build --prefix client
+
+      - name: Debug file permissions
+        run: ls -l node_modules/.bin/jest
+
+      - name: Run Server Tests
+        run: npm test --prefix server
+
+      - name: Run Client Tests
+        run: npm test --prefix client
+     
