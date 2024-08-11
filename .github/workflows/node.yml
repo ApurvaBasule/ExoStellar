@@ -26,4 +26,8 @@ jobs:
           mongodb-version: ${{ matrix.mongodb-version }}
       - run: npm install
       - run: npm run build --prefix client
-      - run: npm test
+      - name: Run Server Tests
+      - run: npx jest --config=server/jest.config.js
+      - name: Run Client Tests
+      - run: npx jest --config=client/jest.config.js
+
