@@ -1,9 +1,11 @@
 name: NASA Project CI
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
 jobs:
   build:
     env:
@@ -24,7 +26,7 @@ jobs:
         uses: supercharge/mongodb-github-action@1.11.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-     - name: Install dependencies
+      - name: Install dependencies
         run: npm install
 
       - name: Build client
@@ -38,4 +40,3 @@ jobs:
 
       - name: Run Client Tests
         run: npm test --prefix client
-     
