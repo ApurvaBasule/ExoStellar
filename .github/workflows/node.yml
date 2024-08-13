@@ -31,12 +31,10 @@ jobs:
 
       - name: Build client
         run: npm run build --prefix client
-
+        
       - name: Debug file permissions
         run: ls -l node_modules/.bin/jest
-
       - name: Run Server Tests
         run: npm test --prefix server
-
       - name: Run Client Tests
         run: npm test --prefix client
