@@ -1,11 +1,3 @@
-name: NASA Project CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
 jobs:
   build:
     env:
@@ -22,19 +14,27 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          
       - name: Use MongoDB from GitHub actions
         uses: supercharge/mongodb-github-action@1.11.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-      - name: Install dependencies
-        run: npm install
+      
+      - name: Install server dependencies
+        run: npm install --prefix server
+
+      - name: Install client dependencies
+        run: npm install --prefix client
 
       - name: Build client
         run: npm run build --prefix client
         
       - name: Debug file permissions
-        run: ls -l node_modules/.bin/jest
+        run: ls -l server/node_modules/.bin/jest
+        
       - name: Run Server Tests
         run: npm test --prefix server
+        
       - name: Run Client Tests
         run: npm test --prefix client
+
