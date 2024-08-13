@@ -29,8 +29,10 @@ jobs:
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
       
-      - name: Install server dependencies
-        run: npm install --prefix server
+      - name: Clean and Install server dependencies
+        run: |
+          rm -rf server/node_modules
+          npm install --prefix server
 
       - name: Install client dependencies
         run: npm install --prefix client
