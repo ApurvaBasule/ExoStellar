@@ -36,9 +36,9 @@ jobs:
 
       - name: Build client
         run: npm run build --prefix client
-        
-      - name: Debug file permissions
-        run: ls -l server/node_modules/.bin/jest
+
+       - name: Set Jest permissions
+        run: chmod +x server/node_modules/.bin/jest
         
       - name: Run Server Tests
         run: npm test --prefix server
