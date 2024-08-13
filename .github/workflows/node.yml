@@ -28,25 +28,14 @@ jobs:
         uses: supercharge/mongodb-github-action@1.11.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-      
-      - name: Clean and Install server dependencies
-        run: |
-          rm -rf server/node_modules
-          npm install --prefix server
 
-      - name: Install client dependencies
-        run: npm install --prefix client
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build client
-        run: npm run build --prefix client
+      - name: Build and Start Application
+        run: npm run deploy
 
-      - name: Set Jest permissions
-        run: chmod +x server/node_modules/.bin/jest
-        
-      - name: Run Server Tests
-        run: npm test --prefix server
-        
-      - name: Run Client Tests
-        run: npm test --prefix client
+      - name: Run Tests
+        run: npm test
 
 
