@@ -18,11 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
       - name: Use Node.js version ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          
+
       - name: Use MongoDB from GitHub actions
         uses: supercharge/mongodb-github-action@1.11.0
         with:
@@ -37,7 +38,7 @@ jobs:
       - name: Build client
         run: npm run build --prefix client
 
-       - name: Set Jest permissions
+      - name: Set Jest permissions
         run: chmod +x server/node_modules/.bin/jest
         
       - name: Run Server Tests
@@ -45,4 +46,5 @@ jobs:
         
       - name: Run Client Tests
         run: npm test --prefix client
+
 
