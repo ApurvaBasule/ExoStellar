@@ -98,7 +98,7 @@ async function addNewLaunch(launch) {
       ...launch,
       success: true,
       upcoming: true,
-      customers: ['Zero to Mastery', 'NASA'],
+      customers: ['ORS', 'NASA'],
       flightNumber: await getLatestFlightNumber() + 1,
     };
 
