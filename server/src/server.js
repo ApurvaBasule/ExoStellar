@@ -14,9 +14,9 @@ async function startServer() {
   try {
     // Connect to MongoDB first
     await mongoConnect();
-    // Load planets data after the connection is established 
+    // planets data loads after the connection is established 
     await loadPlanetsData();
-   //load launches data from SpaceX api after the connection is estamblished
+   // launches data is loaded from SpaceX api 
     await loadLaunchData();
     // Start the server
     server.listen(PORT, () => {
